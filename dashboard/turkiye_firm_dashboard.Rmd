@@ -4,6 +4,8 @@ output:
   flexdashboard::flex_dashboard:
     orientation: columns
     vertical_layout: fill
+  output_dir: docs
+baseurl: "/wb-climate-pilots-turkiye"
 ---
 
 ```{r setup, include=FALSE}
