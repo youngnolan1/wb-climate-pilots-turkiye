@@ -17,13 +17,19 @@ library(ggplot2)
 ```
 
 
-```{r}
+```{r, warning=FALSE}
 # Run scripts which cleans data and creates plotting functions
-setwd("C:/Users/young/OneDrive/Escritorio/wb-climate-pilots-turkiye/scripts")
-source("firm_data_clean.R")
+setwd("C:/Users/young/OneDrive/Escritorio/wb-climate-pilots-turkiye")
+source("scripts/2_firm_data_clean.R")
 
-setwd("C:/Users/young/OneDrive/Escritorio/wb-climate-pilots-turkiye/scripts")
-source("climate_data_clean.R")
+setwd("C:/Users/young/OneDrive/Escritorio/wb-climate-pilots-turkiye")
+source("scripts/3_climate_data_clean.R")
+
+setwd("C:/Users/young/OneDrive/Escritorio/wb-climate-pilots-turkiye")
+source("scripts/4_edgar_data_clean.R")
+
+setwd("C:/Users/young/OneDrive/Escritorio/wb-climate-pilots-turkiye")
+source("scripts/5_naturaldisaster_data_clean.R")
 ```
 
 
@@ -59,40 +65,84 @@ heatplot(sf_firm_count, NULL, NULL)
 Column {.tabset .tabset-fade data-width=500}
 -----------------------------------------------------------------------
 
+### Total GHG Emissions 2022 (all sectors)
+
+```{r}
+heatplot(total22, "Total GHG Emissions 2022", "Millions of tons")
+```
+
+### Industrial Combustion & Processes GHG Emissions 2022
+
+```{r}
+heatplot(industrial_sector, "Industrial Sector GHG Emissions 2022", "Millions of tons")
+```
+
 ### Hot Days
 
 ```{r}
-heatplot_climate(sf_hotdays, "% Change in Average Yearly Number of Hot Days\nPre (1981-2019) to Current (2020-22) Period", NULL)
+legend_title <- "Difference in weighted avg"
+
+heatplot_climate(sf_hotdays, "% Change in Average Yearly Number of Hot Days\nPre (2000-10) to Current (2011-21) Period", legend_title)
 ```
 
 ### SPEI
 
 ```{r}
-heatplot_climate(sf_spei, "% Change in Average Yearly SPEI\nPre (1981-2019) to Current (2020-22) Period", NULL)
+heatplot_climate(sf_spei, "% Change in Average Yearly SPEI\nPre (2000-10) to Current (2011-21) Period", legend_title)
 ```
 
 ### Consecutive Wet Days (5mm)
 
 ```{r}
-heatplot_climate(sf_cwd, "% Change in Average Yearly Number of Consecutive Wet Days\nPre (1981-2019) to Current (2020-22) Period", NULL)
+heatplot_climate(sf_cwd, "% Change in Average Yearly Maximum of\nConsecutive Wet Days - Pre (2000-10) to Current (2011-21) Period", legend_title)
 ```
 
 ### Precipitation
 
 ```{r}
-heatplot_climate(sf_spei, "% Change in Average Yearly Precipitation\nPre (1981-2019) to Current (2020-22) Period", NULL)
+heatplot_climate(sf_precip, "% Change in Average Yearly Precipitation\nPre (2000-10) to Current (2011-21) Period", legend_title)
 ```
 
 ### Dry Days
 
 ```{r}
-heatplot_climate(sf_cwd, "% Change in Average Yearly Number of Dry Days\nPre (1981-2019) to Current (2020-22) Period", NULL)
+heatplot_climate(sf_drydays, "% Change in Average Yearly Number of Dry Days\nPre (2000-10) to Current (2011-21) Period", legend_title)
 ```
 
 ### Consecutive Dry Days (1mm)
 
 ```{r}
-heatplot_climate(sf_spei, "% Change in Average Yearly Number of Consecutive Dry Days\nPre (1981-2019) to Current (2020-22) Period", NULL)
+heatplot_climate(sf_cdd, "% Change in Average Yearly Maximum of\nConsecutive Dry Days - Pre (2000-10) to Current (2011-21) Period", legend_title)
+```
+
+### Firms facing water availability issues
+
+```{r}
+heatplot(sf_water_availability, "Number of firms facing water availability\nissues in 2011-12", NULL)
+```
+
+### Number of disasters
+
+```{r}
+heatplot(sf_disaster_count, "Number of disasters 2000-2021", NULL)
+```
+
+### Disaster alert level
+
+```{r}
+heatplot_alert(sf_disaster_alert, "Average disaster alert level (green-1 /\norange-2 / red-3)", NULL)
+```
+
+### Disaster casualties
+
+```{r}
+heatplot(sf_disaster_casualties, "Total number of casualties 2000-2021", NULL)
+```
+
+### Displaced people
+
+```{r}
+heatplot(sf_disaster_displaced, "Total number of displaced people", "In thousands")
 ```
 
 
@@ -118,41 +168,86 @@ heatplot(sf_avgnumemployees, NULL, NULL)
 Column {.tabset .tabset-fade data-width=500}
 -----------------------------------------------------------------------
 
+### Total GHG Emissions 2022 (all sectors)
+
+```{r}
+heatplot(total22, "Total GHG Emissions 2022", "Millions of tons")
+```
+
+### Industrial Combustion & Processes GHG Emissions 2022
+
+```{r}
+heatplot(industrial_sector, "Industrial Sector GHG Emissions 2022", "Millions of tons")
+```
+
 ### Hot Days
 
 ```{r}
-heatplot_climate(sf_hotdays, "% Change in Average Yearly Number of Hot Days\nPre (1981-2019) to Current (2020-22) Period", NULL)
+legend_title <- "Difference in weighted avg"
+
+heatplot_climate(sf_hotdays, "% Change in Average Yearly Number of Hot Days\nPre (2000-10) to Current (2011-21) Period", legend_title)
 ```
 
 ### SPEI
 
 ```{r}
-heatplot_climate(sf_spei, "% Change in Average Yearly SPEI\nPre (1981-2019) to Current (2020-22) Period", NULL)
+heatplot_climate(sf_spei, "% Change in Average Yearly SPEI\nPre (2000-10) to Current (2011-21) Period", legend_title)
 ```
 
 ### Consecutive Wet Days (5mm)
 
 ```{r}
-heatplot_climate(sf_cwd, "% Change in Average Yearly Number of Consecutive Wet Days\nPre (1981-2019) to Current (2020-22) Period", NULL)
+heatplot_climate(sf_cwd, "% Change in Average Yearly Maximum of\nConsecutive Wet Days - Pre (2000-10) to Current (2011-21) Period", legend_title)
 ```
 
 ### Precipitation
 
 ```{r}
-heatplot_climate(sf_spei, "% Change in Average Yearly Precipitation\nPre (1981-2019) to Current (2020-22) Period", NULL)
+heatplot_climate(sf_precip, "% Change in Average Yearly Precipitation\nPre (2000-10) to Current (2011-21) Period", legend_title)
 ```
 
 ### Dry Days
 
 ```{r}
-heatplot_climate(sf_cwd, "% Change in Average Yearly Number of Dry Days\nPre (1981-2019) to Current (2020-22) Period", NULL)
+heatplot_climate(sf_drydays, "% Change in Average Yearly Number of Dry Days\nPre (2000-10) to Current (2011-21) Period", legend_title)
 ```
 
 ### Consecutive Dry Days (1mm)
 
 ```{r}
-heatplot_climate(sf_spei, "% Change in Average Yearly Number of Consecutive Dry Days\nPre (1981-2019) to Current (2020-22) Period", NULL)
+heatplot_climate(sf_cdd, "% Change in Average Yearly Maximum of\nConsecutive Dry Days - Pre (2000-10) to Current (2011-21) Period", legend_title)
 ```
+
+### Firms facing water availability issues
+
+```{r}
+heatplot(sf_water_availability, "Number of firms facing water availability\nissues in 2011-12", NULL)
+```
+
+### Number of disasters
+
+```{r}
+heatplot(sf_disaster_count, "Number of disasters 2000-2021", NULL)
+```
+
+### Disaster alert level
+
+```{r}
+heatplot_alert(sf_disaster_alert, "Average disaster alert level (green-1 /\norange-2 / red-3)", NULL)
+```
+
+### Disaster casualties
+
+```{r}
+heatplot(sf_disaster_casualties, "Total number of casualties 2000-2021", NULL)
+```
+
+### Displaced people
+
+```{r}
+heatplot(sf_disaster_displaced, "Total number of displaced people", "In thousands")
+```
+
 
 Sectors
 =======================================================================
@@ -160,42 +255,39 @@ Sectors
 Column {.tabset .tabset-fade data-width=500}
 -----------------------------------------------------------------------
 
-### Garments
+### Manufacturing
 
 ```{r}
-legend_title <- "Firms"
+legend_title <- "Weighted\nproportion"
 
-heatplot(sector_count("Garments"), NULL, legend_title)
+heatplot(sector_count("Manufacturing"), NULL, legend_title)
+
+sansinstan <- sector_count("Manufacturing")
+maxcity <- which.max(sansinstan[["HeatVar"]])
+sansinstan[maxcity, "HeatVar"] <- NA
+
+maxcity <- which.max(sansinstan[["HeatVar"]])
+sansinstan[maxcity, "HeatVar"] <- NA
+
+heatplot(sansinstan, NULL, legend_title)
 ```
 
-### Other Manufacturing
+### Wholesale and retail trade
 
 ```{r}
-heatplot(sector_count("Other Manufacturing"), NULL, legend_title)
+heatplot(sector_count("Wholesale and retail trade"), NULL, legend_title)
 ```
 
-### Other Services
+### Transport, storage and communications
 
 ```{r}
-heatplot(sector_count("Other Services"), NULL, legend_title)
+heatplot(sector_count("Transport, storage and communications"), NULL, legend_title)
 ```
 
-### Fabricated Metal Products
+### Real estate, renting and business activities
 
 ```{r}
-heatplot(sector_count("Fabricated Metal Products"), NULL, legend_title)
-```
-
-### Machinery & Equipment
-
-```{r}
-heatplot(sector_count("Machinery & Equipment"), NULL, legend_title)
-```
-
-### Textiles
-
-```{r}
-heatplot(sector_count("Textiles"), NULL, legend_title)
+heatplot(sector_count("Real estate, renting and business activities"), NULL, legend_title)
 ```
 
 ### Construction
@@ -204,54 +296,91 @@ heatplot(sector_count("Textiles"), NULL, legend_title)
 heatplot(sector_count("Construction"), NULL, legend_title)
 ```
 
-### Food
+### Hotels and restaurants
 
 ```{r}
-heatplot(sector_count("Food"), NULL, legend_title)
+heatplot(sector_count("Hotels and restaurants"), NULL, legend_title)
 ```
-
-### Retail
-
-```{r}
-heatplot(sector_count("Retail"), NULL, legend_title)
-```
-
 
 Column {.tabset .tabset-fade data-width=500}
 -----------------------------------------------------------------------
 
+### Total GHG Emissions 2022 (all sectors)
+
+```{r}
+heatplot(total22, "Total GHG Emissions 2022", "Millions of tons")
+```
+
+### Industrial Combustion & Processes GHG Emissions 2022
+
+```{r}
+heatplot(industrial_sector, "Industrial Sector GHG Emissions 2022", "Millions of tons")
+```
+
 ### Hot Days
 
 ```{r}
-heatplot_climate(sf_hotdays, "% Change in Average Yearly Number of Hot Days\nPre (1981-2019) to Current (2020-22) Period", NULL)
+legend_title <- "Difference in weighted avg"
+
+heatplot_climate(sf_hotdays, "% Change in Average Yearly Number of Hot Days\nPre (2000-10) to Current (2011-21) Period", legend_title)
 ```
 
 ### SPEI
 
 ```{r}
-heatplot_climate(sf_spei, "% Change in Average Yearly SPEI\nPre (1981-2019) to Current (2020-22) Period", NULL)
+heatplot_climate(sf_spei, "% Change in Average Yearly SPEI\nPre (2000-10) to Current (2011-21) Period", legend_title)
 ```
 
 ### Consecutive Wet Days (5mm)
 
 ```{r}
-heatplot_climate(sf_cwd, "% Change in Average Yearly Number of Consecutive Wet Days\nPre (1981-2019) to Current (2020-22) Period", NULL)
+heatplot_climate(sf_cwd, "% Change in Average Yearly Maximum of\nConsecutive Wet Days - Pre (2000-10) to Current (2011-21) Period", legend_title)
 ```
 
 ### Precipitation
 
 ```{r}
-heatplot_climate(sf_spei, "% Change in Average Yearly Precipitation\nPre (1981-2019) to Current (2020-22) Period", NULL)
+heatplot_climate(sf_precip, "% Change in Average Yearly Precipitation\nPre (2000-10) to Current (2011-21) Period", legend_title)
 ```
 
 ### Dry Days
 
 ```{r}
-heatplot_climate(sf_cwd, "% Change in Average Yearly Number of Dry Days\nPre (1981-2019) to Current (2020-22) Period", NULL)
+heatplot_climate(sf_drydays, "% Change in Average Yearly Number of Dry Days\nPre (2000-10) to Current (2011-21) Period", legend_title)
 ```
 
 ### Consecutive Dry Days (1mm)
 
 ```{r}
-heatplot_climate(sf_spei, "% Change in Average Yearly Number of Consecutive Dry Days\nPre (1981-2019) to Current (2020-22) Period", NULL)
+heatplot_climate(sf_cdd, "% Change in Average Yearly Maximum of\nConsecutive Dry Days - Pre (2000-10) to Current (2011-21) Period", legend_title)
+```
+
+### Firms facing water availability issues
+
+```{r}
+heatplot(sf_water_availability, "Number of firms facing water availability\nissues in 2011-12", NULL)
+```
+
+### Number of disasters
+
+```{r}
+heatplot(sf_disaster_count, "Number of disasters 2000-2021", NULL)
+```
+
+### Disaster alert level
+
+```{r}
+heatplot_alert(sf_disaster_alert, "Average disaster alert level (green-1 /\norange-2 / red-3)", NULL)
+```
+
+### Disaster casualties
+
+```{r}
+heatplot(sf_disaster_casualties, "Total number of casualties 2000-2021", NULL)
+```
+
+### Displaced people
+
+```{r}
+heatplot(sf_disaster_displaced, "Total number of displaced people", "In thousands")
 ```
